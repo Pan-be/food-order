@@ -7,12 +7,17 @@ import classes from "./AvailableMeals.module.css"
 const AvailableMeals = () => {
 	const [meals, setMeals] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
+	const [requestError, setRequestError] = useState(null)
 
 	useEffect(() => {
 		const fetchMeals = async () => {
 			const response = await fetch(
 				"https://tasks-menager-default-rtdb.firebaseio.com/meals.json"
 			)
+
+			if (!response.ok) {
+				throw new Error("Cann't fetch data from server :(")
+			}
 			const responseData = await response.json()
 
 			const loadedMeals = []
@@ -29,13 +34,24 @@ const AvailableMeals = () => {
 			setMeals(loadedMeals)
 			setIsLoading(false)
 		}
-		fetchMeals()
+		fetchMeals().catch((err) => {
+			setIsLoading(false)
+			setRequestError(err.message)
+		})
 	}, [])
 
 	if (isLoading) {
 		return (
 			<sectction className={classes.mealsLoading}>
 				<p>Loading...</p>
+			</sectction>
+		)
+	}
+
+	if (requestError) {
+		return (
+			<sectction className={classes.mealsError}>
+				<p>{requestError}</p>
 			</sectction>
 		)
 	}
