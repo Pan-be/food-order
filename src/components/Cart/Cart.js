@@ -40,6 +40,16 @@ const Cart = (props) => {
 		</div>
 	)
 
+	const submitOrderHandler = (userData) => {
+		fetch("https://tasks-menager-default-rtdb.firebaseio.com/orders.json", {
+			method: "POST",
+			body: JSON.stringify({
+				user: userData,
+				orderedItems: cartCtx.items,
+			}),
+		})
+	}
+
 	const cartItems = (
 		<ul className={classes["cart-items"]}>
 			{cartCtx.items.map((item) => (
@@ -62,7 +72,9 @@ const Cart = (props) => {
 				<span>Total Amount: </span>
 				<span>{totalAmount}</span>
 			</div>
-			{ordered && <Checkout onCancel={props.onClose} />}
+			{ordered && (
+				<Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
+			)}
 			{!ordered && modalActions}
 		</Modal>
 	)
