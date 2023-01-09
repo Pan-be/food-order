@@ -2,7 +2,7 @@ Welcome to the Order-Meal-Pan-Be Website
 
 This website allows users to place orders for meals online. The website uses React and the Context API for managing state, and Firebase for storing and retrieving data.
 
-You can view the website at https://order-meal-pan-be.netlify.app/.
+You can view the website at https://order-meal-pan-be.netlify.app/.<br><br>
 Features
 
     View a menu of available meals
