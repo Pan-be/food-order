@@ -1,6 +1,6 @@
 Welcome to the Order-Meal-Pan-Be Website
 
-<img src="img/printscree.png" >
+<img src="img/printscreen.png" >
 
 This website allows users to place orders for meals online. The website uses React and the Context API for managing state, and Firebase for storing and retrieving data.
 
